@@ -7,6 +7,7 @@ import java.util.Date;
 @Getter
 @Setter
 public class Tarefa {
+    String nome;
     Date dataInicio;
     Date dataFim;
     String descricao;
