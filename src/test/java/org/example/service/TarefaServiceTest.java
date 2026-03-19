@@ -100,7 +100,7 @@ class TarefaServiceTest {
         when(tarefaRepository.findById(any(UUID.class))).thenReturn(Optional.of(tarefaDTO.toEntity()));
 
         // When
-        AtualizarTarefaResponse result = tarefaService.atualizar( id, tarefaDTO);
+        tarefaService.atualizar( id, tarefaDTO);
 
         // Then
         verify(tarefaRepository,times(1)).findById(any(UUID.class));

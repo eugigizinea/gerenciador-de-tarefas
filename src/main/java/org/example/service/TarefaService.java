@@ -37,6 +37,7 @@ public class TarefaService {
         consultarTarefaResponse.id = tarefaEntity.id;
         consultarTarefaResponse.responsavel = tarefaEntity.responsavel;
         consultarTarefaResponse.dataInicio = tarefaEntity.dataInicio;
+        consultarTarefaResponse.nome = tarefaEntity.nome;
         return consultarTarefaResponse;
     }).collect(Collectors.toUnmodifiableList());
     }
@@ -52,20 +53,13 @@ public class TarefaService {
         consultarTarefaIDResponse.nome = tarefaEntity.nome;
         return consultarTarefaIDResponse;
     }
-    public AtualizarTarefaResponse atualizar (UUID id, TarefaDTO request) {
+    public void atualizar (UUID id, TarefaDTO request) {
         TarefaEntity tarefaEntity = tarefaRepository.findById(id).get();
         tarefaEntity.responsavel = request.responsavel;
         tarefaEntity.dataFim = request.dataFim;
         tarefaEntity.dataInicio = request.dataInicio;
         tarefaEntity.descricao = request.descricao;
+        tarefaEntity.nome = request.nome;
         tarefaRepository.save(tarefaEntity);
-        AtualizarTarefaResponse atualizarTarefaResponse = new AtualizarTarefaResponse();
-        atualizarTarefaResponse.responsavel = tarefaEntity.responsavel;
-        atualizarTarefaResponse.dataFim = tarefaEntity.dataFim;
-        atualizarTarefaResponse.dataInicio = tarefaEntity.dataInicio;
-        atualizarTarefaResponse.nome = tarefaEntity.nome;
-        atualizarTarefaResponse.descricao = tarefaEntity.descricao;
-        return atualizarTarefaResponse;
-
     }
 }

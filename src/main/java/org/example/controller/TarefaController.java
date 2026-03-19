@@ -9,6 +9,7 @@ import org.example.request.RegistrarTarefaRequest;
 import org.example.response.AtualizarTarefaResponse;
 import org.example.response.ConsultarTarefaIDResponse;
 import org.example.response.ConsultarTarefaResponse;
+import org.example.response.RegistrarTarefaResponse;
 import org.example.service.TarefaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -24,8 +25,8 @@ public class TarefaController {
     private TarefaService tarefaService;
 
     @PostMapping
-    public void registrarAtividade ( @RequestBody RegistrarTarefaRequest request){
-    tarefaService.save(request.toDto());
+    public RegistrarTarefaResponse registrarAtividade (@RequestBody RegistrarTarefaRequest request){
+    return tarefaService.save(request.toDto());
     }
     @GetMapping
     public List<ConsultarTarefaResponse> consultar (){
@@ -36,9 +37,9 @@ public class TarefaController {
         return tarefaService.consultar(id);
     }
     @PatchMapping("{id}")
-    public AtualizarTarefaResponse atualizar(@PathVariable UUID id,
+    public void atualizar(@PathVariable UUID id,
                                              @RequestBody AtualizarTarefaRequest request){
-        return tarefaService.atualizar(id, request.toDto());}
+        tarefaService.atualizar(id, request.toDto());}
 
 
 }
